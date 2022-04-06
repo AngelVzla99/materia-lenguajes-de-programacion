@@ -1,6 +1,4 @@
-#include <iostream>
-#include <string>
-#include <cstring>
+#include <bits/stdc++.h>
 #include "handler.hpp"
 
 #define FOR(i,n,m) for(int i=n; i<m; i++)
@@ -44,7 +42,11 @@ int main(){
 			exp = readLine();
 			
 			if( ord!="PRE" && ord!="POST" ) ans = 2;
-			else ans = mainHandler( op, ord, exp );
+			else{
+				pair<int,string> temp = mainHandler( op, ord, exp );
+				ans = temp.first;
+				if(!ans) cout << temp.second << '\n';
+			}
 		}else if( op=="SALIR" ){ 
 			break;
 		}else{

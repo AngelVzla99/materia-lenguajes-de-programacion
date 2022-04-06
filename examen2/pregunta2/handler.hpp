@@ -1,7 +1,4 @@
-#include <iostream>
-#include <string>
-#include <cstring>
-#include <vector>
+#include <bits/stdc++.h>
 
 #define FOR(i,n,m) for(int i=n; i<m; i++)
 
@@ -41,4 +38,4 @@ struct node{
 	}
 };
 
-int mainHandler( string option, string ord, string exp );
+pair<int,string> mainHandler( string option, string ord, string exp );

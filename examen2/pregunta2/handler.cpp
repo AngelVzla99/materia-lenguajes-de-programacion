@@ -23,7 +23,7 @@ node *makeTree( vector<token> &tk, int &i, bool PRE ){
 	if( i>=tk.size() ){ i=tk.size()+5; return new node({-1,-1,' '}); }
 	
 	node *ans;
-	if( tk[i].tipo==1 ){
+	if( tk[i].tipo ){
 		ans = new node(tk[i++]);
 	}else{
 		ans = new node(tk[i++]);
@@ -114,10 +114,10 @@ vector<token> tokenizer( string exp ){
  * 3 | Eror de al lexicografico
  * 4 | Error en la exp
 */
-int mainHandler( string option, string ord, string exp ){
-	int ans = 0;
+pair<int,string> mainHandler( string option, string ord, string exp ){
+	pair<int,string> ans = {0,""};
 	vector<token> tk = tokenizer(exp);
-	if( tk.size()==0 ) ans = 3;
+	if( tk.size()==0 ) ans = {3,""};
 	else{
 		int pos = 0;
 		if( ord=="POST" ) reverse(tk.begin(),tk.end());
@@ -125,11 +125,13 @@ int mainHandler( string option, string ord, string exp ){
 		
 		// si pos < tk.size() => No recorrio toda la lista
 		// si pos = tk.size()+5 => Sobra un token
-		if(pos!=tk.size()) ans = 4;
+		if(pos!=tk.size()) ans = {4,""};
 		else if( option=="EVAL" ){
-			cout << eval(n) << '\n';
+			//cout << eval(n) << '\n';
+			ans.second = to_string( eval(n) );
 		}else{ 
-			cout << toStrNode(n) << '\n';
+			//cout << toStrNode(n) << '\n';
+			ans.second = toStrNode(n);
 		}
 	}
 	return ans;
@@ -138,7 +140,7 @@ int mainHandler( string option, string ord, string exp ){
 /*
 
 MOSTRAR PRE - 2 + 1 3
-// 2 - (1+3)
+// 2-(1+3)
 
 MOSTRAR POST 1 2 3 + -
 // 1-(2+3)
