@@ -12,6 +12,10 @@ typedef long long ll;
 
 using namespace std;
 
+/*
+Esta funcion calcula el tiempo en que tarda alguna de las funciones
+que se encuetran en funcs.cpp en responder y lo imprime por stardar output
+*/
 int main(int argc, char *argv[] ){
 	
 	if( argc==2 ){

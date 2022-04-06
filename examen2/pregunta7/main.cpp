@@ -4,6 +4,11 @@
 #define sz(x) (int)(x).size()
 #define FOR(i,n,m) for(int i=n; i<m; i++)
 
+/*
+Funcion para imprimir un error especifico en el programa
+Argumento
+* e numero del error
+*/
 void error(int e){
     cout <<"Error: ";
     if(e==1){
@@ -17,6 +22,13 @@ void error(int e){
     }
 }
 
+/*
+Funcion para mostrar al usuario del programa un menu interactivo
+este programa es una implementacion del descrito en la pregunta 7
+del examen 2 de lenguajes de programcion. La funcion tras verificar
+que el input es correcto utiliza las funciones que se encunetran
+en el archivo handler.cpp
+*/
 int main(){
 
     cout <<"Para este programa se implemento en manejador con lapidas\n";

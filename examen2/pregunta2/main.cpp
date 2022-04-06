@@ -5,28 +5,37 @@
 
 using namespace std;
 
+/* 
+Funcion para  leer una linea de caracteres sin usar cin>>
+longitud del buffer = 10000
+* return: La linea ingresada poe el usuario
+*/
 string readLine(){
 	char *buffer;
     size_t bufsize = 10000;
     size_t characters;
 
+	// se reserva memoria
     buffer = (char *)malloc(bufsize * sizeof(char));
     if( buffer == NULL){
         perror("Unable to allocate buffer");
         exit(1);
     }
 
-    //printf("Type something: ");
     characters = getline(&buffer,&bufsize,stdin);
-    //printf("%zu characters were read.\n",characters);
-    //printf("You typed: '%s'\n",buffer);
     
+	// Se para el arreglo de caracterse a string 
     string ans = "";
     int n = strlen(buffer);
     FOR(i,1,n-1) ans += buffer[i];
 	return ans;
 };
 
+/*
+En esta funcion se encuentra el menu principal que se usa en
+el programa, tras pedir una accion al usuario se hacen las correspondientes
+llamadas a las funciones en handler.cpp 
+*/
 int main(){
 		
 	while(true){
@@ -43,6 +52,8 @@ int main(){
 			
 			if( ord!="PRE" && ord!="POST" ) ans = 2;
 			else{
+				// Esto es un par donde la primera coordenada indica si 
+				// hubo un error y cual la segunda dice, si no hubo error, la respuesta 
 				pair<int,string> temp = mainHandler( op, ord, exp );
 				ans = temp.first;
 				if(!ans) cout << temp.second << '\n';
@@ -53,6 +64,7 @@ int main(){
 			ans = 1;
 		}
 		
+		// Mensajes de error
 		if( ans==1 ) cout <<"Opcion invalida\n"; 
 		else if( ans==2 ) cout <<"<orden> solo puede ser PRE o POST\n";
 		else if( ans==3 ) cout <<"Error lexicografico en la expresion\n";

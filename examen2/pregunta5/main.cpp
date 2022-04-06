@@ -6,14 +6,28 @@
 
 using namespace std;
 
+/*
+Funcion para imprimir un eroror al usuario
+Argumentos
+* int e | Cual error ocurrio
+*/
 void error( int e ){
     if( e==1 ){
         cout <<"Error: <nombre> ya correspondea algún tipo creado en el programa.\n";
     }else if( e==2 ){
         cout <<"Error: El tipo utilizado no ha sido declarado.\n";
+    }else if( e==3 ){
+        cout <<"Error: Opcion invalida\n";
     }
 }
 
+/*
+Esta funcion se encarga de imprimir el despserdicio de memoria 
+en cada uno de los 4 cassis que solicita el problema
+Argumetnos:
+* string name | nombre de una variable existente
+* int op | opcion a seleccionar entre las 4
+*/
 void printDesperdicio( string name, int op ){
     if( op==0 ){
         cout <<"El lenguaje guarda registros y arreglos sin empaquetar.\n";
@@ -27,6 +41,12 @@ void printDesperdicio( string name, int op ){
     cout <<"Desperdicio = "<< getDesperdicio( name, op ) << endl;
 }
 
+/*
+Esta funcion se encarga de mostrar un menu interactivo para la pregunt 5 
+del examen 2 de lenguajes de programacion. Al obtener y verificar el input del
+usuario utiliza las funciones que se encuentran en handler.cpp para responder las 
+consultas
+*/
 int main(){
     while(true){
         cout <<"Seleccionar 1 de las siguientes opciones\n";
@@ -48,6 +68,7 @@ int main(){
             getline(cin,linea);
             linea += " ";
 
+            // se hace un split de linea por espacios
             vector<string> lista;
             bool valid = true;
             string name2 = "";
@@ -75,6 +96,8 @@ int main(){
             if(!ans) FOR(i,0,4) printDesperdicio( name, i );
         }else if( op=="SALIR" ){
             break;
+        }else{
+            ans = 3;
         }
 
         if(ans) error(ans);
