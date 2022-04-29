@@ -46,9 +46,11 @@ class MyThread(
 object Archivos {
     
     def main(args: Array[String]){
+        // En vez de prueba1 se coloca el directorio 
+        // del que se quiere obtener la respuesta
         var th = new MyThread(0,"prueba1");
-        th.start();
-        th.join();
+        th.start(); // Se crea un hilo para el directorio inicial
+        th.join();  // Se espera a que el hilo termine
         println( "Numero de archivos " + th.numberOfFiles );
     } 
 }
