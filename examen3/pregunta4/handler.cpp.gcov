@@ -1,0 +1,56 @@
+        -:    0:Source:handler.cpp
+        -:    0:Graph:handler.gcno
+        -:    0:Data:handler.gcda
+        -:    0:Runs:1
+        -:    1:#include "handler.hpp"
+        -:    2:
+        -:    3:typedef pair<string,string> pss;
+        -:    4:map<string, vector<pss>> h;
+        -:    5:
+        -:    6:/*
+        -:    7:Funcion para agregar una clase al arbol binario de busqueda 'h'
+        -:    8:Complejidad: O( log(NumeroDeClases)*( ClasesDelPadre + ClasesNuevas ) )
+        -:    9:Argumentos
+        -:   10:* string name | Nombre de la clase a ser creada
+        -:   11:* string super | Nombre de la clase padre ( cuando es igual a "" no tiene padre )
+        -:   12:Return 
+        -:   13:* 0 Si se logro agregar la clase con exito
+        -:   14:* 2 Si el nombre de la clase ingresada ya fue declarado
+        -:   15:* 3 Si el nombres de la clase super no existe
+        -:   16:*/
+       32:   17:int addClass( string name, string super, vector<string> resto ){
+       32:   18:    int ans = 0;
+        -:   19:
+       32:   20:    if( !h[name].empty() ) ans = 2;
+       22:   21:    else if( super!="" && h[super].empty() ) ans = 3;
+        -:   22:    else{
+       24:   23:        vector<pss> tabla = h[super];
+        -:   24:
+       24:   25:        map<string,int> pos;
+       59:   26:        FOR(i,0,tabla.size()) pos[tabla[i].second] = i+1;
+        -:   27:
+       35:   28:        for(string newMethod: resto){
+       23:   29:            if( !pos[newMethod] ) tabla.push_back({name,newMethod});
+       10:   30:            else tabla[pos[newMethod]-1].first = name;
+        -:   31:        }
+        -:   32:
+       12:   33:        h[name] = tabla;
+        -:   34:    }
+       32:   35:    return ans;
+        -:   36:}
+        -:   37:
+        -:   38:/*
+        -:   39:Retorna la tabla de metodos virtuales correstpondiente 
+        -:   40:al nombres ingresado por parametro. Se restorna en forma de lista
+        -:   41:si la lista esta vacia el nombres no ha sido agregado
+        -:   42:*/
+       30:   43:vector<pss> getTable( string name ){
+       30:   44:    return h[name];
+        -:   45:} 
+        -:   46:
+        -:   47:/*
+        -:   48:Procedimiento para  eliminar todas las clases agregadas
+        -:   49:*/
+        2:   50:void cleanAllClass(){
+        2:   51:    h.clear();
+        2:   52:}
