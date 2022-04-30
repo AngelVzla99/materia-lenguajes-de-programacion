@@ -1,6 +1,6 @@
 module Partec where
 
-data Arbol a = Hoja | Rama a (Arbol a) (Arbol a) deriving(Show)
+data Arbol a = Hoja | Rama a (Arbol a) (Arbol a)
 
 foldA :: (a -> b -> b -> b) -> b -> Arbol a -> b
 foldA _ b Hoja = b
